@@ -16,9 +16,27 @@ import com.book.servlets.Model.GetAllModel;
 public class ViewServlet extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+// Fetch from Render Environment Variables
+        String urlsql = System.getenv("DB_URL"); 
+        String usernamesql = System.getenv("DB_USERNAME");
+        String passwordsql = System.getenv("DB_PASSWORD");
+
+        // Fallback for Local Testing
+        if (urlsql == null || urlsql.isEmpty()) {
+            ServletContext ctx = getServletContext();
+            urlsql = ctx.getInitParameter("url");  // Read from web.xml
+            usernamesql = ctx.getInitParameter("username");
+            passwordsql = ctx.getInitParameter("password");
+        }
+
+        // Store in Object
+        Dbdetails db = new Dbdetails();
+        db.setUrl(urlsql);
+        db.setUsername(usernamesql);
+        db.setPassword(passwordsql);
 
 		UserRepository user = new UserRepository();
-		List<DetailsModel> userdetails = user.getuser();
+		List<DetailsModel> userdetails = user.getuser(db);
 
 		System.out.println(userdetails);
 		String username = "";
@@ -37,7 +55,7 @@ public class ViewServlet extends HttpServlet {
 			System.out.println("No user details found.");
 		}
 		UserRepository user1 = new UserRepository();
-		List<GetAllModel> allinfo = user.getAllData(username, password);
+		List<GetAllModel> allinfo = user.getAllData(username, password,db);
 		req.setAttribute("list", allinfo);
 		System.out.println(allinfo);
 		RequestDispatcher dispatche = req.getRequestDispatcher("view.jsp");
