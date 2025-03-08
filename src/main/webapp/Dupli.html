@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script type="text/javascript">
+	(function() {
+		emailjs.init("Pft59U6lY3L1I0fLL");
+	})();
+</script>
+<script>
+function mail() {
+	const parms = {
+		name: document.getElementById("name").value,
+		email: document.getElementById("email").value,
+		phone_number: document.getElementById("phone").value,
+		message: "You Ticket was Booked Successfully",
+		from: document.getElementById("from").value,
+		to: document.getElementById("to").value,
+		date: document.getElementById("date").value,
+		seatno: selectedSeatIds[0]
+	};
+
+	// Send the email using EmailJS
+	emailjs.send("service_jjixvpl", "template_y4tm9v5", parms)
+		.then(function(response) {
+			alert("Email sent successfully!");
+
+		}, function(error) {
+			alert("Error sending email: " + error.text);
+
+		});
+}
+
+</script>
+</head>
+
+<body>
+	
+		<button type="submit" id="email" onclick="mail()">Get Email Conformation</button>
+
+</body>
+</html>

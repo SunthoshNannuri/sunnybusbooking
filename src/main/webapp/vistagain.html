@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Thank You Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+             background-image: url("busbackground.jpg");
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    background-size:cover;
+    background-position: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #333;
+        }
+
+        h1 {
+            color: #4CAF50;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:active {
+            background-color: #3e8e41;
+        }
+    </style>
+    <script>
+        function vistagin() {
+            console.log("I am visiting the login page again");
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+<body>
+    <h1>Thank You, Visit Again!</h1>
+    <button onclick="vistagin()">Sunny Bus Booking</button>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unblock Seats</title>
+</head>
+<body>
+    <h1>Unblock All Seats</h1>
+    <button id="unblockBtn">Unblock All Seats</button>
+
+    <script>
+        const unblockBtn = document.getElementById('unblockBtn');
+
+        unblockBtn.addEventListener('click', () => {
+            console.log('Unblock button clicked'); // Debugging log
+
+            // Clear local storage
+            localStorage.removeItem('employeeedSeats');
+            console.log('All seats unblocked from local storage.');
+
+            // Optionally navigate back to the main page
+            alert('All seats have been unblocked!');
+            window.location.href = 'login.html'; // Change to the actual path of your main booking file
+        });
+    </script>
+</body>
+</html>
