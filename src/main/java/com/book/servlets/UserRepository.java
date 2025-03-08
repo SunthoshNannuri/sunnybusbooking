@@ -115,7 +115,7 @@ public class UserRepository {
 		String query = "select * from duplicatetable";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql:///BusUserdetails", "root", "root");
+			Connection con = DriverManager.getConnection(db.getUrl(), db.getUsername(), db.getPassword());
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
@@ -139,7 +139,7 @@ public class UserRepository {
 		List<AllInfoModel> list = new ArrayList<AllInfoModel>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql:///BusUserdetails", "root", "root");
+			Connection con = DriverManager.getConnection(db.getUrl(), db.getUsername(), db.getPassword());
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
@@ -167,7 +167,7 @@ public class UserRepository {
 		String query = "truncate duplicatetable";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql:///BusUserdetails", "root", "root");
+                        Connection con = DriverManager.getConnection(db.getUrl(), db.getUsername(), db.getPassword());
 			PreparedStatement pr = con.prepareStatement(query);
 			pr.executeUpdate();
 
@@ -184,7 +184,7 @@ public class UserRepository {
 		String query = "select * from dupli where username='" + username + "' and password='" + password + "' ORDER BY id DESC LIMIT 1";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql:///bususerdetails", "root", "root");
+			Connection con = DriverManager.getConnection(db.getUrl(), db.getUsername(), db.getPassword());
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			while (rs.next()) {
