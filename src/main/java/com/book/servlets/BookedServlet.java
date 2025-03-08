@@ -55,15 +55,25 @@ public class BookedServlet extends HttpServlet{
         } else {
             System.out.println("No user details found.");
         }
-		ServletContext ctx = getServletContext();
-		   String urlsql=ctx.getInitParameter("url");
-		   String usernamesql=ctx.getInitParameter("username");
-		   	String passwordsql=ctx.getInitParameter("password");
-		   	
-		   	Dbdetails db=new Dbdetails();
-		   	db.setUrl(urlsql);
-		   	db.setUsername(usernamesql);
-		   	db.setPassword(passwordsql);
+		// Fetch from Render Environment Variables
+        String urlsql = System.getenv("DB_URL"); 
+        String usernamesql = System.getenv("DB_USERNAME");
+        String passwordsql = System.getenv("DB_PASSWORD");
+
+        // Fallback for Local Testing
+        if (urlsql == null || urlsql.isEmpty()) {
+            ServletContext ctx = getServletContext();
+            urlsql = ctx.getInitParameter("url");  // Read from web.xml
+            usernamesql = ctx.getInitParameter("username");
+            passwordsql = ctx.getInitParameter("password");
+        }
+
+        // Store in Object
+        Dbdetails db = new Dbdetails();
+        db.setUrl(urlsql);
+        db.setUsername(usernamesql);
+        db.setPassword(passwordsql);
+
 		   	
          UserRepository repo=new UserRepository();
          repo.details(username,password,from,to,name,email,phone,gender,seatno,date,db);
