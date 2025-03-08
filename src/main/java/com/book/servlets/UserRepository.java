@@ -109,7 +109,7 @@ public class UserRepository {
 		return "yes";
 	}
 
-	public List<DetailsModel> getuser() {
+	public List<DetailsModel> getuser(Dbdetails db) {
 
 		List<DetailsModel> list = new ArrayList<DetailsModel>();
 		String query = "select * from duplicatetable";
@@ -134,7 +134,7 @@ public class UserRepository {
 
 	}
 
-	public List<AllInfoModel> AllInfo(String username, String password) {
+	public List<AllInfoModel> AllInfo(String username, String password,Dbdetails db) {
 		String query = "select * from dupli where password='" + username + "' and gender='" + password + "'";
 		List<AllInfoModel> list = new ArrayList<AllInfoModel>();
 		try {
@@ -163,7 +163,7 @@ public class UserRepository {
 
 	}
 
-	public String truncate() {
+	public String truncate(Dbdetails db) {
 		String query = "truncate duplicatetable";
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -179,7 +179,7 @@ public class UserRepository {
 
 	}
 
-	public List<GetAllModel> getAllData(String username,String password) {
+	public List<GetAllModel> getAllData(String username,String password,Dbdetails db) {
 		List<GetAllModel> list = new ArrayList<GetAllModel>();
 		String query = "select * from dupli where username='" + username + "' and password='" + password + "' ORDER BY id DESC LIMIT 1";
 		try {
