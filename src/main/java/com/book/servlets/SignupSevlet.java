@@ -17,15 +17,25 @@ import com.book.servlets.Model.Dbdetails;
 public class SignupSevlet extends HttpServlet {
 
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		ServletContext ctx = getServletContext();
-		String urlsql = ctx.getInitParameter("url");
-		String usernamesql = ctx.getInitParameter("username");
-		String passwordsql = ctx.getInitParameter("password");
+		// Fetch from Render Environment Variables
+        String urlsql = System.getenv("DB_URL"); 
+        String usernamesql = System.getenv("DB_USERNAME");
+        String passwordsql = System.getenv("DB_PASSWORD");
 
-		Dbdetails db = new Dbdetails();
-		db.setUrl(urlsql);
-		db.setUsername(usernamesql);
-		db.setPassword(passwordsql);
+        // Fallback for Local Testing
+        if (urlsql == null || urlsql.isEmpty()) {
+            ServletContext ctx = getServletContext();
+            urlsql = ctx.getInitParameter("url");  // Read from web.xml
+            usernamesql = ctx.getInitParameter("username");
+            passwordsql = ctx.getInitParameter("password");
+        }
+
+        // Store in Object
+        Dbdetails db = new Dbdetails();
+        db.setUrl(urlsql);
+        db.setUsername(usernamesql);
+        db.setPassword(passwordsql);
+
 
 		String username = req.getParameter("username");
 		String email = req.getParameter("email");
